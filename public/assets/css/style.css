@@ -612,6 +612,7 @@ body.nav-active { overflow: hidden; }
   transition: var(--transition-1);
 }
 
+
 .header.active {
   padding-block: 20px;
   background-color: var(--eerie-black-4);

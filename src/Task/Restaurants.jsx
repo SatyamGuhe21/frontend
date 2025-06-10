@@ -83,29 +83,26 @@ const Restaurant = () => {
 
   // Waste tracking data
   const wasteData = [
-    { name: "Food Waste", value: 8.5, color: "#f093fb", percentage: 45.2 },
-    { name: "Bar & Alcohol", value: 4.1, color: "#ff6b9d", percentage: 21.8 },
-    { name: "Packaging", value: 3.2, color: "#667eea", percentage: 17.0 },
-    { name: "Organic", value: 2.1, color: "#43e97b", percentage: 11.2 },
-    { name: "Recyclables", value: 0.9, color: "#4facfe", percentage: 4.8 },
+    { name: "Food Waste", value: 8.5, color: "#f093fb", percentage: 56.7 },
+    { name: "Packaging", value: 3.2, color: "#667eea", percentage: 21.3 },
+    { name: "Organic", value: 2.1, color: "#43e97b", percentage: 14.0 },
+    { name: "Recyclables", value: 1.2, color: "#4facfe", percentage: 8.0 },
   ]
 
   const wasteByCategory = [
     { category: "Vegetables", amount: 3.2, cost: 45.5, trend: "up" },
     { category: "Meat", amount: 2.8, cost: 89.2, trend: "down" },
-    { category: "Wine & Spirits", amount: 2.4, cost: 156.8, trend: "up" },
-    { category: "Beer", amount: 1.7, cost: 68.3, trend: "stable" },
     { category: "Dairy", amount: 1.5, cost: 23.8, trend: "up" },
     { category: "Bread", amount: 1.0, cost: 12.4, trend: "stable" },
   ]
 
   const wasteTimeline = [
-    { time: "6:00", food: 0.5, bar: 0.1, packaging: 0.2, organic: 0.1, recyclables: 0.1 },
-    { time: "9:00", food: 1.2, bar: 0.2, packaging: 0.4, organic: 0.3, recyclables: 0.2 },
-    { time: "12:00", food: 2.8, bar: 0.8, packaging: 1.1, organic: 0.7, recyclables: 0.4 },
-    { time: "15:00", food: 1.5, bar: 0.6, packaging: 0.6, organic: 0.4, recyclables: 0.2 },
-    { time: "18:00", food: 3.1, bar: 1.2, packaging: 1.2, organic: 0.8, recyclables: 0.5 },
-    { time: "21:00", food: 2.2, bar: 1.2, packaging: 0.8, organic: 0.5, recyclables: 0.3 },
+    { time: "6:00", food: 0.5, packaging: 0.2, organic: 0.1, recyclables: 0.1 },
+    { time: "9:00", food: 1.2, packaging: 0.4, organic: 0.3, recyclables: 0.2 },
+    { time: "12:00", food: 2.8, packaging: 1.1, organic: 0.7, recyclables: 0.4 },
+    { time: "15:00", food: 1.5, packaging: 0.6, organic: 0.4, recyclables: 0.2 },
+    { time: "18:00", food: 3.1, packaging: 1.2, organic: 0.8, recyclables: 0.5 },
+    { time: "21:00", food: 2.2, packaging: 0.8, organic: 0.5, recyclables: 0.3 },
   ]
 
   const wasteReductionTips = [
@@ -114,12 +111,6 @@ const Restaurant = () => {
       title: "Portion Control",
       description: "Implement smaller portion sizes to reduce plate waste",
       impact: "Reduce food waste by 25%",
-    },
-    {
-      icon: <BsCup />,
-      title: "Bar Inventory Management",
-      description: "Track pour costs and implement proper bottle rotation",
-      impact: "Reduce alcohol waste by 30%",
     },
     {
       icon: <BsRecycle />,
@@ -411,7 +402,7 @@ const Restaurant = () => {
               </div>
               <div className="waste-card-content">
                 <h3>Total Waste</h3>
-                <div className="waste-amount">18.8 lbs</div>
+                <div className="waste-amount">15.0 lbs</div>
                 <div className="waste-trend negative">
                   <BsArrowUpShort />
                   +8% from yesterday
@@ -425,7 +416,7 @@ const Restaurant = () => {
               </div>
               <div className="waste-card-content">
                 <h3>Waste Cost</h3>
-                <div className="waste-amount">$456.80</div>
+                <div className="waste-amount">$171.70</div>
                 <div className="waste-trend negative">
                   <BsArrowUpShort />
                   +12% from yesterday
@@ -515,14 +506,6 @@ const Restaurant = () => {
                   />
                   <Legend />
                   <Area type="monotone" dataKey="food" stackId="1" stroke="#f093fb" fill="#f093fb" name="Food Waste" />
-                  <Area
-                    type="monotone"
-                    dataKey="bar"
-                    stackId="1"
-                    stroke="#ff6b9d"
-                    fill="#ff6b9d"
-                    name="Bar & Alcohol"
-                  />
                   <Area
                     type="monotone"
                     dataKey="packaging"
@@ -1134,9 +1117,9 @@ const Restaurant = () => {
       </div>
 
       {/* Main Stats Cards */}
-      <div className="main-cards">
-        <div className="card">
-          <div className="card-inner">
+      <div className="main-cards1">
+        <div className="card1">
+          <div className="card-inner1">
             <div>
               <h3>PRODUCTS</h3>
               <p>300</p>
@@ -1147,8 +1130,8 @@ const Restaurant = () => {
             <BsFillArchiveFill className="card_icon" />
           </div>
         </div>
-        <div className="card">
-          <div className="card-inner">
+        <div className="card1">
+          <div className="card-inner1">
             <div>
               <h3>CATEGORIES</h3>
               <p>12</p>
@@ -1159,8 +1142,8 @@ const Restaurant = () => {
             <BsFillGrid3X3GapFill className="card_icon" />
           </div>
         </div>
-        <div className="card">
-          <div className="card-inner">
+        <div className="card1">
+          <div className="card-inner1">
             <div>
               <h3>CUSTOMERS</h3>
               <p>33</p>
@@ -1171,8 +1154,8 @@ const Restaurant = () => {
             <BsPeopleFill className="card_icon" />
           </div>
         </div>
-        <div className="card">
-          <div className="card-inner">
+        <div className="card1">
+          <div className="card-inner1">
             <div>
               <h3>ALERTS</h3>
               <p>42</p>
@@ -1243,7 +1226,7 @@ const Restaurant = () => {
               </div>
               <div className="metric-content">
                 <h4>Waste Recorded</h4>
-                <p>18.8 lbs</p>
+                <p>15 lbs</p>
               </div>
             </div>
           </div>

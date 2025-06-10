@@ -1,25 +1,113 @@
 .userTable {
-    width: 60%;
-    margin: 50px auto;
-    background-color: white;
-    padding: 50px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.userTable:hover {
+  transform: translateY(-3px);
+}
+
+.userTable h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.userTable table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.userTable table thead th {
+  background-color: #007f91;
+  color: #fff;
+  padding: 12px 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.userTable table tbody td {
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 15px;
+  color: #333;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.userTable table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.userTable table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.actionButtons button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actionButtons button:hover {
+  transform: scale(1.05);
+}
+
+.actionButtons .edit-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.actionButtons .edit-btn:hover {
+  background-color: #2980b9;
+}
+
+.actionButtons .delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.actionButtons .delete-btn:hover {
+  background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .userTable {
+    padding: 20px;
   }
-  .userTable table {
-    width: 100%;
-    margin-top: 30px;
-  }
-  .userTable table thead th {
-    background-color: darkcyan;
-    color: white;
-  }
-  
+
+  .userTable table thead th,
   .userTable table tbody td {
+    font-size: 13px;
     padding: 10px;
-    text-align: center;
-    vertical-align: middle;
   }
-  .actionButtons button {
-    margin: 0 10px;
+
+  .actionButtons {
+    flex-direction: column;
+    gap: 6px;
   }
+}

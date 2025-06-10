@@ -43,18 +43,10 @@ const LabourList = () => {
     const fetchLabours = async () => {
       try {
         const token = localStorage.getItem("token");
-
-        if (!token) {
-          console.log("No token found");
-          return;
-        }
-
+        if (!token) return;
         const res = await axios.get("http://localhost:8000/api/labour/alllabour", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
-
         setLabours(res.data);
       } catch (err) {
         console.error("Failed to fetch labours:", err);
@@ -66,10 +58,106 @@ const LabourList = () => {
 
   return (
     <div className="container py-4">
-      
+      <style>{`
+        .card {
+          border-radius: 14px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          overflow: hidden;
+          background: #ffffff;
+        }
+
+        .card-header {
+          background: linear-gradient(90deg, #0077b6, #00b4d8);
+          color: #fff;
+          font-weight: 600;
+          font-size: 1.2rem;
+          padding: 15px 25px;
+        }
+
+        .card-body {
+          padding: 30px;
+        }
+
+        .form-label {
+          font-weight: 600;
+          color: #333;
+        }
+
+        .form-control,
+        .form-select {
+          border-radius: 8px;
+          padding: 10px 12px;
+        }
+
+        .btn-success {
+          padding: 10px 20px;
+          border-radius: 10px;
+          font-weight: 600;
+          background-color: #06d6a0;
+          border: none;
+        }
+
+        .btn-success:hover {
+          background-color: #05b68f;
+        }
+
+        h2 {
+          font-weight: 700;
+          color: #1d3557;
+        }
+
+        .table {
+          background-color: #fff;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .table thead th {
+          background-color: #1d3557;
+          color: #fff;
+          font-size: 0.95rem;
+          text-transform: uppercase;
+        }
+
+        .table tbody tr:nth-child(even) {
+          background-color: #f8f9fa;
+        }
+
+        .table td,
+        .table th {
+          vertical-align: middle;
+          text-align: center;
+        }
+
+        .btn-outline-primary {
+          border-radius: 50%;
+          padding: 6px 10px;
+          font-size: 14px;
+        }
+
+        .alert-warning {
+          background: #fff3cd;
+          border: 1px solid #ffeeba;
+          color: #856404;
+          border-radius: 10px;
+          padding: 15px;
+        }
+
+        @media (max-width: 768px) {
+          .card-body {
+            padding: 20px;
+          }
+
+          .table th, .table td {
+            font-size: 13px;
+            padding: 10px;
+          }
+        }
+      `}</style>
+
       <div className="card my-4">
-        <div className="card-header bg-primary text-white">
-          <h5 className="mb-0">Add New Labour</h5>
+        <div className="card-header">
+          Add New Labour
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
@@ -160,7 +248,7 @@ const LabourList = () => {
       ) : (
         <div className="table-responsive">
           <table className="table table-bordered table-striped table-hover">
-            <thead className="table-dark">
+            <thead>
               <tr>
                 <th>#</th>
                 <th>Name</th>

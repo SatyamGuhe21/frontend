@@ -78,7 +78,6 @@ const InventoryList = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      // Convert barForm to match API schema
       const barPayload = {
         itemName: barForm.drinkName,
         itemCategory: "bar",
@@ -113,11 +112,8 @@ const InventoryList = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setInventory(res.data);
-
-      // Separate into bar and restaurant inventory
       const barItems = res.data.filter((item) => item.itemCategory.toLowerCase() === "bar");
       const restaurantItems = res.data.filter((item) => item.itemCategory.toLowerCase() !== "bar");
-
       setBarInventory(barItems);
       setRestaurantInventory(restaurantItems);
     } catch (err) {
@@ -183,15 +179,122 @@ const InventoryList = () => {
 
   return (
     <div className="container py-4">
+      <style>{`
+        .card {
+          border-radius: 14px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          background: #ffffff;
+          overflow: hidden;
+        }
+
+        .card-header {
+          background: linear-gradient(90deg, #0077b6, #00b4d8);
+          color: #fff;
+          font-weight: 600;
+          font-size: 1.1rem;
+          padding: 15px 25px;
+        }
+
+        .card-body {
+          padding: 30px;
+        }
+
+        .form-label {
+          font-weight: 600;
+          color: #333;
+        }
+
+        .form-control,
+        .form-select {
+          border-radius: 10px;
+          padding: 10px 14px;
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-success {
+          background-color: #06d6a0;
+          border: none;
+          padding: 10px 20px;
+          font-weight: 600;
+          border-radius: 10px;
+        }
+
+        .btn-success:hover {
+          background-color: #05b68f;
+        }
+
+        .btn-lg {
+          font-size: 1rem;
+          padding: 8px 20px;
+          border-radius: 10px;
+          font-weight: 600;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .table {
+          background-color: #fff;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .table thead th {
+          background-color: #1d3557;
+          color: #fff;
+          text-transform: uppercase;
+          font-size: 0.9rem;
+        }
+
+        .table tbody tr:nth-child(even) {
+          background-color: #f8f9fa;
+        }
+
+        .table td, .table th {
+          vertical-align: middle;
+          text-align: center;
+        }
+
+        .btn-outline-primary {
+          border-radius: 50%;
+          padding: 6px 10px;
+          font-size: 14px;
+        }
+
+        .alert-warning {
+          background: #fff3cd;
+          border: 1px solid #ffeeba;
+          color: #856404;
+          border-radius: 10px;
+          padding: 15px;
+        }
+
+        h2 {
+          font-weight: 700;
+          color: #1d3557;
+        }
+
+        @media (max-width: 768px) {
+          .card-body {
+            padding: 20px;
+          }
+
+          .btn-lg {
+            width: 100%;
+            margin-bottom: 10px;
+          }
+
+          .table th, .table td {
+            font-size: 13px;
+            padding: 10px;
+          }
+        }
+      `}</style>
+
       {renderSwitchButtons()}
 
       {activePage === "inventory" && (
         <>
-          {/* Restaurant Inventory Form */}
           <div className="card my-4">
-            <div className="card-header bg-primary text-white">
-              <h5 className="mb-0">Add Inventory Item</h5>
-            </div>
+            <div className="card-header">Add Inventory Item</div>
             <div className="card-body">
               <form onSubmit={handleInventorySubmit}>
                 <div className="row g-3">
@@ -273,11 +376,8 @@ const InventoryList = () => {
 
       {activePage === "bar" && (
         <>
-          {/* Bar Inventory Form */}
           <div className="card my-4">
-            <div className="card-header bg-primary text-white">
-              <h5 className="mb-0">Add Bar Item</h5>
-            </div>
+            <div className="card-header">Add Bar Item</div>
             <div className="card-body">
               <form onSubmit={handleBarSubmit}>
                 <div className="row g-3">
