@@ -4,12 +4,16 @@ import axios from "axios";
 const AllDishList = () => {
   const [dishes, setDishes] = useState([]);
   const [formData, setFormData] = useState({
+    dishId: "",
     name: "",
-    category: "",
     description: "",
-    ingredients: "",
-    image: "",
+    category: "",
+    quantity: "",
     price: "",
+    costPrice: "",
+    prepTime: "",
+    calories: "",
+    inventoryAlert: "",
   });
   const [message, setMessage] = useState("");
 
@@ -44,8 +48,11 @@ const AllDishList = () => {
         "http://localhost:8000/api/dish",
         {
           ...formData,
-          ingredients: formData.ingredients.split(",").map((item) => item.trim()),
           price: parseFloat(formData.price),
+          costPrice: parseFloat(formData.costPrice),
+          prepTime: parseInt(formData.prepTime),
+          calories: parseInt(formData.calories),
+          inventoryAlert: parseInt(formData.inventoryAlert),
         },
         {
           headers: {
@@ -55,12 +62,16 @@ const AllDishList = () => {
       );
       setMessage("Dish added successfully!");
       setFormData({
+        dishId: "",
         name: "",
-        category: "",
         description: "",
-        ingredients: "",
-        image: "",
+        category: "",
+        quantity: "",
         price: "",
+        costPrice: "",
+        prepTime: "",
+        calories: "",
+        inventoryAlert: "",
       });
       fetchDishes();
     } catch (err) {
@@ -77,18 +88,6 @@ const AllDishList = () => {
           padding: 40px;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
           margin-bottom: 60px;
-          transition: all 0.3s ease;
-        }
-
-        .form-section:hover {
-          transform: translateY(-2px);
-        }
-
-        .form-section h3 {
-          font-weight: 700;
-          color: #2c3e50;
-          margin-bottom: 30px;
-          text-align: center;
         }
 
         .form-label {
@@ -100,7 +99,6 @@ const AllDishList = () => {
           border-radius: 10px;
           padding: 10px 15px;
           font-size: 1rem;
-          box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
         }
 
         .btn-primary {
@@ -125,11 +123,6 @@ const AllDishList = () => {
           border-radius: 16px;
           padding: 20px;
           box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-          transition: all 0.3s ease;
-        }
-
-        .dish-card:hover {
-          transform: scale(1.01);
         }
 
         .dish-card h4 {
@@ -138,13 +131,6 @@ const AllDishList = () => {
 
         .dish-card p {
           margin-bottom: 6px;
-          color: #2f3640;
-        }
-
-        .dish-card img {
-          max-width: 180px;
-          margin-top: 10px;
-          border-radius: 12px;
         }
 
         .btn-info,
@@ -152,116 +138,63 @@ const AllDishList = () => {
           font-weight: 600;
           border-radius: 8px;
         }
-
-        .btn-info {
-          background-color: #00b4d8;
-          border: none;
-        }
-
-        .btn-success {
-          background-color: #06d6a0;
-          border: none;
-        }
-
-        @media (max-width: 768px) {
-          .form-section {
-            padding: 25px;
-          }
-
-          .dish-card img {
-            width: 100%;
-            max-width: 100%;
-          }
-        }
       `}</style>
 
       <div className="form-section">
-        <h3>Add New Dish 🍽️</h3>
+        <h3 className="text-center mb-4">🍽️ Add New Dish</h3>
         <form onSubmit={handleSubmit}>
-          <div className="row mb-3">
-            <div className="col-md-6">
-              <label className="form-label">Name</label>
-              <input
-                type="text"
-                name="name"
-                className="form-control"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Dish name"
-                required
-              />
+          <div className="row g-3">
+            <div className="col-md-4">
+              <label className="form-label">Dish ID</label>
+              <input type="text" name="dishId" className="form-control" value={formData.dishId} onChange={handleChange} required />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
+              <label className="form-label">Dish Name</label>
+              <input type="text" name="name" className="form-control" value={formData.name} onChange={handleChange} required />
+            </div>
+            <div className="col-md-4">
               <label className="form-label">Category</label>
-              <select
-                name="category"
-                className="form-control"
-                value={formData.category}
-                onChange={handleChange}
-                required
-              >
+              <select name="category" className="form-control" value={formData.category} onChange={handleChange} required>
                 <option value="">Select category</option>
-                <option value="starter">Starter</option>
-                <option value="main course">Main Course</option>
-                <option value="dessert">Dessert</option>
+                <option value="Starter">Starter</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverage">Beverage</option>
               </select>
             </div>
+            <div className="col-md-6">
+              <label className="form-label">Description</label>
+              <textarea name="description" className="form-control" rows="2" value={formData.description} onChange={handleChange} required />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label">Quantity (gm/lbs)</label>
+              <input type="text" name="quantity" className="form-control" value={formData.quantity} onChange={handleChange} required />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">Selling Price (£)</label>
+              <input type="number" name="price" className="form-control" value={formData.price} onChange={handleChange} step="0.01" required />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">Cost Price (£)</label>
+              <input type="number" name="costPrice" className="form-control" value={formData.costPrice} onChange={handleChange} step="0.01" required />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">Preparation Time (min)</label>
+              <input type="number" name="prepTime" className="form-control" value={formData.prepTime} onChange={handleChange} required />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label">Calories</label>
+              <input type="number" name="calories" className="form-control" value={formData.calories} onChange={handleChange} required />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label">Inventory Alert (Low Stock)</label>
+              <input type="number" name="inventoryAlert" className="form-control" value={formData.inventoryAlert} onChange={handleChange} required />
+            </div>
           </div>
 
-          <div className="mb-3">
-            <label className="form-label">Description</label>
-            <textarea
-              name="description"
-              className="form-control"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Short description"
-              rows="3"
-              required
-            />
+          <div className="mt-4 text-center">
+            <button type="submit" className="btn btn-primary px-5">Add Dish</button>
           </div>
-
-          <div className="mb-3">
-            <label className="form-label">Ingredients (comma-separated)</label>
-            <textarea
-              name="ingredients"
-              className="form-control"
-              value={formData.ingredients}
-              onChange={handleChange}
-              placeholder="e.g. rice, spices, chicken"
-              rows="2"
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label">Image URL</label>
-            <input
-              type="text"
-              name="image"
-              className="form-control"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="http://example.com/image.jpg"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="form-label">Price (USD)</label>
-            <input
-              type="number"
-              name="price"
-              className="form-control"
-              value={formData.price}
-              onChange={handleChange}
-              min="0"
-              step="0.01"
-              placeholder="Enter price"
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary w-100">Add Dish</button>
         </form>
 
         {message && (
@@ -279,16 +212,18 @@ const AllDishList = () => {
           {dishes.map((dish) => (
             <li key={dish._id} className="dish-card mb-4">
               <h4>{dish.name}</h4>
+              <p><strong>Dish ID:</strong> {dish.dishId}</p>
               <p><strong>Category:</strong> {dish.category}</p>
               <p><strong>Description:</strong> {dish.description}</p>
-              <p><strong>Ingredients:</strong> {dish.ingredients?.join(", ")}</p>
-              <p><strong>Price:</strong> ${dish.price?.toFixed(2)}</p>
-              {dish.image && (
-                <img src={dish.image} alt={dish.name} className="img-fluid" />
-              )}
-              <div className="mt-3">
-                <button type="button" className="btn btn-info me-2">Assign Task</button>
-                <button type="button" className="btn btn-success">Mark as Complete</button>
+              <p><strong>Quantity:</strong> {dish.quantity}</p>
+              <p><strong>Price:</strong> £{dish.price}</p>
+              <p><strong>Cost:</strong> £{dish.costPrice}</p>
+              <p><strong>Prep Time:</strong> {dish.prepTime} min</p>
+              <p><strong>Calories:</strong> {dish.calories} kcal</p>
+              <p><strong>Inventory Alert:</strong> {dish.inventoryAlert}</p>
+              <div className="mt-2">
+                <button className="btn btn-info me-2">Assign Task</button>
+                <button className="btn btn-success">Mark Complete</button>
               </div>
             </li>
           ))}
